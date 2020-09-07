@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,6 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PostRepositoryTest {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     PostsRepository postsRepository;
@@ -29,8 +32,9 @@ public class PostRepositoryTest {
     @Test
     public void 게시글저장_불러오기() {
         // given
-        postsRepository.save(Posts.builder().title("테스트 게시글").content("테스트 본문").author("kgmcode").build());
-
+        Posts result = postsRepository
+                .save(Posts.builder().title("테스트 게시글").content("테스트 본문").author("kgmcode").build());
+        logger.info("{}", result);
         // when
         List<Posts> postsList = postsRepository.findAll();
 

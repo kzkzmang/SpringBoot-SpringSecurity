@@ -13,8 +13,8 @@
     <a>
         <%@include file="templates/SecurityHeader.jsp" %>
 
-        <a href="test">Test Page</a>
-        <a href="adminOnly">
+        <a href="jeju/test">Test Page</a>
+        <a href="jeju/adminOnly">
             <sec:authorize access="hasRole('ADMIN')">adminOnly Page
         </a></sec:authorize>
         <a href="login">

@@ -27,7 +27,7 @@ public class LoginFailHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException exception) throws IOException, ServletException {
         // TODO Auto-generated method stub
-        logger.error("오류!!!! {} ", exception.getMessage());
+        logger.error("오류!!!! {} ", exception);
 
         request.setAttribute("title", "로그인 실패");
         if (exception instanceof AuthenticationServiceException) {

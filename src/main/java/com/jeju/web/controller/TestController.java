@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -15,24 +17,26 @@ public class TestController {
     @Autowired
     private SessionRegistry sessionRegistry;
 
-    @GetMapping("/")
-    public String home() {
+    @RequestMapping(method = { RequestMethod.GET }, value = "/")
+    public String Home() {
         return "Home";
     }
 
-    @GetMapping("/asd")
-    public String asd() {
-        return "Home";
+    @RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "/jeju/{uri}")
+    public String dynamicController(@PathVariable String uri) {
+        String jsp = uri.substring(0, 1).toUpperCase() + uri.substring(1);
+
+        return jsp;
     }
 
     @ResponseBody
-    @RequestMapping("/test")
+    @RequestMapping("/jeju/test")
     public String test() {
         return "OK";
     }
 
     @ResponseBody
-    @RequestMapping("/adminOnly")
+    @RequestMapping("/jeju/adminOnly")
     public String adminOnly() {
         return "Secret Page";
     }
